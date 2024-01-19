@@ -1,4 +1,4 @@
-# Project Title
+# Scripting directories and files 
 
 Scripting Project 
 
