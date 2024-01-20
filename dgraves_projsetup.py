@@ -38,19 +38,29 @@ def create_annual_directories(directory_name: str, start_year: int, end_year: in
         print(f"Created {year_directory}")
 
 # Define create_folders_from_list function
-def create_folders_from_list(folder_list: list, base_directory: str):
+def create_folders_from_list(folder_list: list, base_directory: str, to_lowercase=True, remove_spaces=True):
     """
     Create folders from a list of names.
     :param folder_list: A list of folder names.
     :param base_directory: The base directory where folders will be created.
+    :param to_lowercase: If True, converts folder names to lowercase.
+    :param remove_spaces: If True, removes spaces from folder names.
     """
     base_path = pathlib.Path(base_directory)
 
     for folder_name in folder_list:
-        folder_path = base_path.joinpath(folder_name)
+        folder_check = folder_name
+
+        # Conditional formatting for spaces and capitalization 
+        if to_lowercase and remove_spaces:
+            folder_check = folder_check.replace(' ', '')  
+            folder_check = folder_check.lower()  
+
+        folder_path = base_path.joinpath(folder_check)
         # Creates folder if it doesn't exist
         folder_path.mkdir(exist_ok=True)
         print(f"Folder '{folder_name}' created successfully at {folder_path}")
+
 
 # Define create_prefixed_folders function
 def create_prefixed_folders(folder_list, prefix, base_directory):
@@ -90,7 +100,7 @@ def create_folders_periodically(duration, folder_name_prefix, num_folders):
     folder_to_monitor = base_path / "data_import_intervals"
     known_folders = set(os.listdir(folder_to_monitor))
 
-    #Loop to monitor the directory and create folders every time interval 
+    # Loop to monitor the directory and create folders every time interval 
     while True:
         current_folders = set(os.listdir(folder_to_monitor))
         new_folders = current_folders - known_folders
@@ -103,7 +113,7 @@ def create_folders_periodically(duration, folder_name_prefix, num_folders):
 
             known_folders = current_folders
 
-    # Loop function monitors directory and creates folders at intervals (seconds)
+        # Loop function monitors directory and creates folders at intervals (seconds)
         time.sleep(duration)
 
 def main():
@@ -111,16 +121,16 @@ def main():
     Main function 
     Calls the variables and functions defined to create folders and display byline from imported module
     """
-    #Prints byline function from dgraves_utils module
+    # Prints byline function from dgraves_utils module
     print(f'Byline: {dgraves_utils.byline}')
 
-    #Calls function to create annual sub-directories under employee_data folder
+    # Calls function to create annual sub-directories under employee_data folder
     create_annual_directories(directory_name='employee_data', start_year=2021, end_year=2024)
    
-    #Gives list of folder names to be created
+    # Gives list of folder names to be created
     folder_names_to_create = ('data_source', 'data_import_intervals')
     
-    #Specifies the base directory to create folders in
+    # Specifies the base directory to create folders in
     base_dir = "C:\Users\derek\OneDrive\Documents\44608 Data Analytics Fundamentals\Mod 2\datafun-02-projects"
   
     # Calls function to create folders from list
@@ -131,7 +141,7 @@ def main():
     prefix = 'source-'
     create_prefixed_folders(prefixed_folder_names, prefix, base_directory=base_dir)
     
-    #Calls function to check for and create folders per 10 sec time intervals limited to quantity 5
+    # Calls function to check for and create folders per 10 sec time intervals limited to quantity 5
     create_folders_periodically(duration_secs=10, num_folders=5)
 
 # Call the main function
