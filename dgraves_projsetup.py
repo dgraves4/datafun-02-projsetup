@@ -64,16 +64,16 @@ def create_prefixed_folders(folder_list, prefix, base_directory):
     base_path = pathlib.Path(base_directory)
 
     if prefix:
-        folders = [base_path.joinpath("data_source", prefix + folder_name) for folder_name in folder_list]
+        folders = (base_path.joinpath("data_source", prefix + folder_name) for folder_name in folder_list)
     else:
-        folders = [base_path.joinpath("data_source", folder_name) for folder_name in folder_list]
+        folders = (base_path.joinpath("data_source", folder_name) for folder_name in folder_list)
 
     for folder_path in folders:
         folder_path.mkdir(parents=True, exist_ok=True)
     return folders
 
 # Folder name prefixes defined
-prefixed_folder_names = ['raw', 'processed', 'archived', 'internal', 'external', 'test']
+prefixed_folder_names = ('raw', 'processed', 'archived', 'internal', 'external', 'test')
 prefix = 'source-'
 
 # Define create_folders_periodically function
@@ -96,7 +96,7 @@ def create_folders_periodically(duration, folder_name_prefix, num_folders):
         new_folders = current_folders - known_folders
 
         if new_folders:
-            for new_folder in list(new_folders)[:num_folders]:  # Limit the number of created folders
+            for new_folder in list(new_folders)(:num_folders):  # Limit the number of created folders
                 folder_path = folder_to_monitor / new_folder
                 folder_path.mkdir(exist_ok=True)
                 print(f"Folder '{new_folder}' created successfully at {folder_path}")
@@ -118,16 +118,16 @@ def main():
     create_annual_directories(directory_name='employee_data', start_year=2021, end_year=2024)
    
     #Gives list of folder names to be created
-    folder_names_to_create = ['data_source', 'data_import_intervals']
+    folder_names_to_create = ('data_source', 'data_import_intervals')
     
     #Specifies the base directory to create folders in
-    base_dir = r"C:\Users\derek\OneDrive\Documents\44608 Data Analytics Fundamentals\Mod 2\datafun-02-projects"
+    base_dir = "C:\Users\derek\OneDrive\Documents\44608 Data Analytics Fundamentals\Mod 2\datafun-02-projects"
   
     # Calls function to create folders from list
     create_folders_from_list(folder_names_to_create, base_directory=base_dir)
    
     # Establishes prefixes for prefixed folder names and calls function to create them
-    prefixed_folder_names = ['raw', 'processed', 'archived', 'internal', 'external', 'test']
+    prefixed_folder_names = ('raw', 'processed', 'archived', 'internal', 'external', 'test')
     prefix = 'source-'
     create_prefixed_folders(prefixed_folder_names, prefix, base_directory=base_dir)
     
