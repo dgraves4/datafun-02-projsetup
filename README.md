@@ -1,4 +1,4 @@
-# Creating Directories 
+# Projecct 2: Creating Directories 
 
 ## Description
 
