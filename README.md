@@ -2,4 +2,4 @@
 
 ## Description
 
-This module uses functions to create a series of project folders using loops and branching as well as demontrating the import of the modeule and the byline from Project 1.
+This module uses functions to create a series of project folders using loops and branching as well as demonstrating the import of the module and the byline from Project 1.
