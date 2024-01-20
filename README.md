@@ -1,7 +1,5 @@
-# Scripting directories and files 
-
-Scripting Project 
+# Creating Directories 
 
 ## Description
 
-This is the project for the Data Analytics Fundamentals Module 2. The module provides practical project setup techniques and a series of reusable functions for drafting project folders.
+This module uses functions to create a series of project folders using loops and branching as well as demontrating the import of the modeule and the byline from Project 1.
